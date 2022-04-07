@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7Map</title>
     <link href="assets/favicon.png" rel="shortcut icon" type="image/png">
-    <link rel="stylesheet" href="assets/css/leaflet.css" />
     <link rel="stylesheet" href="assets/css/styles.css<?= "?v=" . rand(1, 999) ?>" />
-    <script src="assets/js/leaflet.js<?= "?v=" . rand(99, 9999999) ?>"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 
 <body>

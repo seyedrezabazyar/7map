@@ -51,3 +51,35 @@ setTimeout(function () {
     // map.setView([33.772, 50.328], defaultZoom);
     // map.setView([northLine, westLine], defaultZoom);
 }, 2000)
+
+
+
+
+
+
+
+
+// find Current Location (at first, Use Shekan.ir)
+var current_position, current_accuracy;
+map.on('locationfound', function (e) {
+    // if position defined, then remove the existing position marker and accuracy circle from the map
+    if (current_position) {
+        map.removeLayer(current_position);
+        map.removeLayer(current_accuracy);
+    }
+    var radius = e.accuracy;
+    current_position = L.marker(e.latlng).addTo(map)
+        .bindPopup("دقت تقریبی: " + radius + " متر").openPopup();
+    current_accuracy = L.circle(e.latlng, radius).addTo(map);
+});
+map.on('locationerror', function (e) {
+    alert(e.message);
+});
+// wrap map.locate in a function    
+function locate() {
+    map.locate({ setView: true, maxZoom: defaultZoom });
+}
+// call locate every 5 seconds... forever
+setInterval(locate, 5000);
+// once...
+// setTimeout(locate, 5000);
