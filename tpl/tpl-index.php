@@ -26,7 +26,7 @@
             <span class="close">x</span>
             <h3 class="modal-title">ثبت لوکیشن</h3>
             <div class="modal-content">
-                <form action="<?= site_url('process/addLocation.php'); ?>" method="post">
+                <form id="addLocationForm" action="<?= site_url('process/addLocation.php'); ?>" method="post">
                     <div class="field-row">
                         <div class="field-title">مختصات</div>
                         <div class="field-content">
@@ -37,13 +37,13 @@
                     <div class="field-row">
                         <div class="field-title">نام مکان</div>
                         <div class="field-content">
-                            <input type="text" name="title" placeholder="نام یک مکان را وارد کنید">
+                            <input type="text" name="title" id="l-title" placeholder="نام یک مکان را وارد کنید">
                         </div>
                     </div>
                     <div class="field-row">
                         <div class="field-title">نوع</div>
                         <div class="field-content">
-                            <select name="type">
+                            <select name="type" id="l-type">
                                 <?php foreach (locationTypes as $key => $value) : ?>
                                     <option value="<?= $key ?>"><?= $value ?></option>
                                 <?php endforeach; ?>
@@ -64,13 +64,6 @@
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/scripts.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.modal-overlay .close').click(function() {
-                $('.modal-overlay').fadeOut();
-            });
-        });
-    </script>
 
 </body>
 

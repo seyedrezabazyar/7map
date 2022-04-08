@@ -44,8 +44,10 @@ map.on('dblclick', function (event) {
     $('.modal-overlay').fadeIn(500);
     $('#lat-display').val(event.latlng.lat);
     $('#lng-display').val(event.latlng.lng);
-    //3 : fill the form and submit location data to server
-    //4 : save location in database (status: pending review)
+    $('#l-title').val('');
+    $('#l-type').val(0);
+    //3 done: fill the form and submit location data to server
+    //4 done: save location in database (status: pending review)
     //5 : review location and verify if ok
 });
 
@@ -77,3 +79,24 @@ function locate() {
 }
 // call locate every 5 seconds... forever
 // setInterval(locate, 5000);
+
+$(document).ready(function () {
+    $('form#addLocationForm').submit(function (e) {
+        e.preventDefault(); // Prevent form submiting
+        var form = $(this);
+        var resultTag = form.find('.ajax-result');
+        $.ajax({
+            url: form.attr('action'),
+            method: form.attr('method'),
+            data: form.serialize(),
+            success: function (response) {
+                resultTag.html(response);
+            }
+        });
+
+    });
+
+    $('.modal-overlay .close').click(function () {
+        $('.modal-overlay').fadeOut();
+    });
+});
