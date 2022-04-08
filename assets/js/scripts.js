@@ -42,8 +42,8 @@ map.on('dblclick', function (event) {
     L.marker(event.latlng).addTo(map);
     //2 : open modal (form) for save the clicked location
     $('.modal-overlay').fadeIn(500);
-    $('#lat-display').html(event.latlng.lat);
-    $('#lng-display').html(event.latlng.lng);
+    $('#lat-display').val(event.latlng.lat);
+    $('#lng-display').val(event.latlng.lng);
     //3 : fill the form and submit location data to server
     //4 : save location in database (status: pending review)
     //5 : review location and verify if ok
