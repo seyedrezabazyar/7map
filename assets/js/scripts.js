@@ -38,26 +38,22 @@ map.on('zoomend', function () {
 // Use map events
 map.on('dblclick', function (event) {
     // alert(event.latlng.lat + " , " + event.latlng.lng);
-    // L.marker([event.latlng.lat, event.latlng.lng]).addTo(map);
     //1 : add marker to clickable location
+    L.marker(event.latlng).addTo(map);
     //2 : open modal (form) for save the clicked location
+    $('.modal-overlay').fadeIn(500);
+    $('#lat-display').html(event.latlng.lat);
+    $('#lng-display').html(event.latlng.lng);
     //3 : fill the form and submit location data to server
     //4 : save location in database (status: pending review)
     //5 : review location and verify if ok
 });
 
 // Set view in map
-setTimeout(function () {
-    // map.setView([33.772, 50.328], defaultZoom);
-    // map.setView([northLine, westLine], defaultZoom);
-}, 2000)
-
-
-
-
-
-
-
+// setTimeout(function () {
+//     map.setView([33.772, 50.328], defaultZoom);
+//     map.setView([northLine, westLine], defaultZoom);
+// }, 2000)
 
 // find Current Location (at first, Use Shekan.ir)
 var current_position, current_accuracy;
@@ -80,6 +76,4 @@ function locate() {
     map.locate({ setView: true, maxZoom: defaultZoom });
 }
 // call locate every 5 seconds... forever
-setInterval(locate, 5000);
-// once...
-// setTimeout(locate, 5000);
+// setInterval(locate, 5000);
