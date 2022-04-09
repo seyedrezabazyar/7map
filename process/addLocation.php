@@ -2,9 +2,9 @@
 
 include '../bootstrap/init.php';
 
-// if (!isAjaxRequest()) {
-//     diePage('Invalid Request!');
-// }
+if (!isAjaxRequest()) {
+    diePage('Invalid Request!');
+}
 
 // Request is Ajax and OK
 if (insertLocation($_POST)) {

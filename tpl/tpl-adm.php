@@ -66,6 +66,11 @@ use Hekmatinasser\Verta\Verta;
             color: #ffffff;
         }
 
+        .statusToggle.all {
+            background: #007bec ;
+            color: #ffffff;
+        }
+
         .statusToggle:hover,
         button.preview:hover {
             opacity: 0.7;
@@ -107,6 +112,7 @@ use Hekmatinasser\Verta\Verta;
         <h1>پنل مدیریت <span style="color:#007bec">سون مپ</span></h1>
         <div class="box">
             <a class="statusToggle" href="<?= BASE_URL ?>">🏠</a>
+            <a class="statusToggle all" href="<?= BASE_URL ?>adm.php">همه</a>
             <a class="statusToggle active" href="?verified=1">فعال</a>
             <a class="statusToggle" href="?verified=0">غیرفعال</a>
             <a class="statusToggle" href="?logout=1" style="float:left">خروج</a>
@@ -130,9 +136,7 @@ use Hekmatinasser\Verta\Verta;
                             <td class="text-center"><?= $loc->lat ?></td>
                             <td class="text-center"><?= $loc->lng ?></td>
                             <td>
-                                <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc='<?= $loc->id ?>'>
-                                    <?= $loc->verified ? 'فعال' : 'غیر فعال' ?>
-                                </button>
+                                <button class="statusToggle <?= $loc->verified ? 'active' : '' ?>" data-loc='<?= $loc->id ?>'>تایید</button>
                                 <button class="preview" data-loc='<?= $loc->id ?>'>👁️‍🗨️</button>
                             </td>
                         </tr>
@@ -159,7 +163,22 @@ use Hekmatinasser\Verta\Verta;
         $(document).ready(function() {
             $('.preview').click(function() {
                 $('.modal-overlay').fadeIn();
-                $('#mapWivdow').attr('src', '<?= BASE_URL ?>');
+                $('#mapWivdow').attr('src', '<?= BASE_URL ?>?loc=' + $(this).attr('data-loc'));
+            });
+            $('.statusToggle').click(function() {
+                const btn = $(this)
+                $.ajax({
+                    url: '<?= BASE_URL . 'process/statusToggle.php' ?>',
+                    method: 'POST',
+                    data: {
+                        loc: btn.attr('data-loc')
+                    },
+                    success: function(response) {
+                        if (response == 1) {
+                            btn.toggleClass('active');
+                        }
+                    }
+                });
             });
             $('.modal-overlay .close').click(function() {
                 $('.modal-overlay').fadeOut();
